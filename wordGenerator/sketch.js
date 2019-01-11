@@ -10,6 +10,7 @@ var wordChecker;
 var all_words;
 var rainWords = false;
 var wordFactory = new WordFactory();
+var wordList;
 
 
 //helper function to display border
@@ -24,11 +25,12 @@ function drawBorder(){
 function generate(){
   wordFactory.loadPossibles(input.value());
   fallingWords = wordFactory.getWords(wordChecker);
-  numLetters = fallingWords.length;
-  //convert normal words to showFallingWords
-  for(var i = 0; i < fallingWords.length; i++){
-    fallingWords[i] = new FallingText(fallingWords[i]);
-  }
+  // numLetters = fallingWords.length;
+  // //convert normal words to showFallingWords
+  // for(var i = 0; i < fallingWords.length; i++){
+  //   fallingWords[i] = new FallingText(fallingWords[i]);
+  // }
+  wordList = new WordList(fallingWords, 0,0);
   rainWords = true;
 }
 
@@ -98,11 +100,12 @@ function showFallingWords(){
 function draw(){
 
   background(255);
-  
+
   showStaticElements();
-  if(!rainWords){
-    showFallingLetters();
+  if(rainWords){
+      wordList.show();
   }else{
-    showFallingWords();
+    showFallingLetters();
+
   }
 }
