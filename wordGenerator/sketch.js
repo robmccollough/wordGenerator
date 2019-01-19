@@ -2,7 +2,6 @@
 //Rob McCollough
 var alphabet = 'abcdefghijklmnopqrstuvwxyz';
 var fallingLetters = [];
-var fallingWords = [];
 var numLetters = 50;
 var input;
 var button;
@@ -14,23 +13,19 @@ let wordList;
 
 
 //helper function to display border
-// function drawBorder(){
-//   strokeWeight(5);
-//   fill(255);
-//   line(0,0, 800, 0);
-//   line(800, 0, 800, 600);
-//   line(800, 600, 0, 600);
-//   line(0, 600, 0, 0);
-// }
+function drawBorder(){
+
+}
 
 function generate(){
   wordFactory.loadPossibles(input.value());
 
-  // numLetters = fallingWords.length;
-  // //convert normal words to showFallingWords
-  // for(var i = 0; i < fallingWords.length; i++){
-  //   fallingWords[i] = new FallingText(fallingWords[i]);
-  // }
+  //clear html and make new list if its been clicked
+  if(showList){
+  var previous = document.getElementById('mainContainer');
+  previous.parentNode.removeChild(previous);
+  }
+
   wordList = new WordList(wordFactory.getWords(wordChecker), 310, 225);
   showList = true;
 }
@@ -41,7 +36,10 @@ function preload(){
 }
 
 function setup(){
-  createCanvas(800, 600);
+
+  var canv = createCanvas(800, 600);
+  canv.style('border-style:solid;border-width:5px;');
+
   //load the array with letters
   for(var i = 0; i < numLetters; i++){
     var newChar = new FallingText(alphabet.charAt(random(26)));
@@ -63,7 +61,6 @@ function setup(){
 function showStaticElements(x, y){
   textAlign(CENTER);
   textFont('Monospace', 100);
-  //drawBorder();
   fill(0);
   text("Word", x , y - 40);
   text("Generator", x, y + 35);
@@ -86,36 +83,35 @@ function showFallingLetters(){
   }
 }
 
-function mouseWheel(event){
-  if(showList && wordList.onList(mouseX,mouseY)){
-    wordList.scroll(event.delta);
-  }
-}
-
-//runs after first button click
-// function showFallingWords(){
-//   for(var i = 0; i < fallingWords.length; i++){
-//     fallingWords[i].show();
-//     fallingWords[i].update();
-//
-//     //replace if gone offscreen
-//     if(fallingWords[i].y > 600){
-//         fallingWords[i] = new FallingText(fallingWords[i].letter);
-//     }
-//   }
-// }
-
 function draw(){
 
   background(255);
   showFallingLetters();
+  drawBorder();
 
+  //display list only after first click
   if(showList){
       showStaticElements(400, 150);
       wordList.show();
   }else{
       showStaticElements(400,300);
   }
-
-
 }
+  // function mouseWheel(event){
+  //   if(showList && wordList.onList(mouseX,mouseY)){
+  //     wordList.scroll(event.delta);
+  //   }
+  // }
+
+  //runs after first button click
+  // function showFallingWords(){
+  //   for(var i = 0; i < fallingWords.length; i++){
+  //     fallingWords[i].show();
+  //     fallingWords[i].update();
+  //
+  //     //replace if gone offscreen
+  //     if(fallingWords[i].y > 600){
+  //         fallingWords[i] = new FallingText(fallingWords[i].letter);
+  //     }
+  //   }
+  // }
