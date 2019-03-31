@@ -1,11 +1,11 @@
-This is a p5.js sketch to generate and display subsets of a given input string that qualify as english words. I am using a file containing
-every enlgish word to verify the permutations. The file is read in at runtime and a hash set created to reduce time complexity of checks.
-
-
-
-todo:
-
-  -add reset button, resets to just falling letters
-  -get rid of fallingWords
-  -show list of the words normally (small animation, maybe have the whole list grow in size and be able to scroll
-  -make a wordlist object
+Title - WordGenerator
+Version - 1.0.0
+Release Date - 12/4/18
+Author - Rob McCollough
+Purpose - To see if I could display all valid english words generated from chars of a given string in an interesting way
+Mission - Success if you ask me
+Future Updates -
+  -Add support for user input letter ranges
+  -Non-English dictionaries?
+  -Dictionary API call would be easier than a quick and dirty file read
+  -Write a file containing valid words for that particular string to file system and just look that up if the string is entered again
